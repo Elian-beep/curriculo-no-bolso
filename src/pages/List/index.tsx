@@ -10,15 +10,15 @@ import { iconCurr, iconList } from "../../mock/icons_tabs";
 
 export const List = ({ navigation }) => {
     const [curriculum, setCurriculum] = useState<ISimpleCurriculum[]>([]);
-    const { setIconListContext, setIconCurrContext } = useIconsContext();
     const { currentRouteName } = useRouteContext();
     const { setSharedData } = useAppContext();
     setSharedData(navigation);
-
-    useEffect(() => {
-        setIconListContext(iconList.dark);
-        setIconCurrContext(iconCurr.light);
-    }, [currentRouteName]);
+    
+    // const { setIconListContext, setIconCurrContext } = useIconsContext();
+    // useEffect(() => {
+    //     setIconListContext(iconList.dark);
+    //     setIconCurrContext(iconCurr.light);
+    // }, [currentRouteName]);
 
     return (
         <DefaultContent>

@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { List } from "../pages/List";
 import { CreateCv } from "../pages/CreateCv";
 import { NavigationContainer } from "@react-navigation/native";
+import { IconsProvider } from "../../contexts/IconsContext";
 
 const Stack = createNativeStackNavigator();
 

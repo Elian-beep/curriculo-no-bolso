@@ -8,15 +8,15 @@ import { FormRequired } from "../../components/Forms/FormRequired";
 import { ISimpleCurriculum } from "../../interfaces/ICurriculum";
 
 export const CreateCv = () => {
-    const { setIconListContext, setIconCurrContext } = useIconsContext();
     const { currentRouteName } = useRouteContext();
-
+    
     const [currRequired, setCurrRequired] = useState<ISimpleCurriculum>({completeName: "", email: "", phone: "", title: ""});
-
-    useEffect(() => {
-        setIconListContext(iconList.light);
-        setIconCurrContext(iconCurr.dark);
-    }, [currentRouteName]);
+    
+    // const { setIconListContext, setIconCurrContext } = useIconsContext();
+    // useEffect(() => {
+    //     setIconListContext(iconList.light);
+    //     setIconCurrContext(iconCurr.dark);
+    // }, [currentRouteName]);
 
     return (
         <DefaultContent>

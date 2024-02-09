@@ -7,10 +7,11 @@ import { useAppContext } from "../../../contexts/AppContext";
 
 export const AlertDefault = () => {
     const { sharedData } = useAppContext();
+    const { setCurrentRouteName } = useRouteContext();
 
     const handleCreateCv = async () => {
-        await sharedData.navigate("createCv")
-        sharedData.navigate("createCv");
+        await setCurrentRouteName("createCv");
+        sharedData.navigate("createCv")
     }
 
     return (
@@ -20,7 +21,7 @@ export const AlertDefault = () => {
             <DescriptionText>
                 Parece que ainda não há nenhum currículo criado. Toque no botão 'Criar currículo' e inicie sua primeira jornada profissional.
             </DescriptionText>
-            <ButtonDefault title="Criar Curriculo" onPress={() => handleCreateCv} />
+            <ButtonDefault title="Criar Curriculo" onPress={handleCreateCv} />
         </FlexVertCenter>
     )
 }
