@@ -1,17 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { AllContainer, DefaultContent } from './src/default.styled';
+import { AllContainer } from './src/default.styled';
 import { TitleTop } from './src/components/TItleTop';
 import { Routes } from './src/routes';
 import { AppProvider } from './contexts/AppContext';
+import { RouteProvider } from './contexts/RouteContext';
+import { IconsProvider } from './contexts/IconsContext';
 
 export default function App() {
   return (
-    <AllContainer>
-      <TitleTop text='Currículo de Bolso' />
-      <AppProvider>
-        <Routes />
-      </AppProvider>
-      <StatusBar style="auto" />
-    </AllContainer>
+    <AppProvider>
+      <RouteProvider>
+        <IconsProvider>
+          <AllContainer>
+            <TitleTop text='Currículo de Bolso' />
+            <Routes />
+            <StatusBar style="auto" />
+          </AllContainer>
+        </IconsProvider>
+      </RouteProvider>
+    </AppProvider>
   );
 }

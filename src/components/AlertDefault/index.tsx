@@ -2,8 +2,16 @@ import { Button, Image, View } from "react-native"
 import { DuoTitle } from "../DuoTitle"
 import { DescriptionText, FlexVertCenter } from "./styled.alertDefault"
 import { ButtonDefault } from "../ButtonDefault";
+import { useRouteContext } from "../../../contexts/RouteContext";
+import { useAppContext } from "../../../contexts/AppContext";
 
 export const AlertDefault = () => {
+    const { sharedData } = useAppContext();
+
+    const handleCreateCv = async () => {
+        await sharedData.navigate("createCv")
+        sharedData.navigate("createCv");
+    }
 
     return (
         <FlexVertCenter>
@@ -12,7 +20,7 @@ export const AlertDefault = () => {
             <DescriptionText>
                 Parece que ainda não há nenhum currículo criado. Toque no botão 'Criar currículo' e inicie sua primeira jornada profissional.
             </DescriptionText>
-            <ButtonDefault title="Criar Curriculo" onPress={() => console.log("Vamos criar um currículo bro")} />
+            <ButtonDefault title="Criar Curriculo" onPress={() => handleCreateCv} />
         </FlexVertCenter>
     )
 }
