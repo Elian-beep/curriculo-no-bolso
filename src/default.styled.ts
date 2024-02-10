@@ -25,6 +25,10 @@ export const ContainerForm = styled.View<Props>`
     gap: 16px;
 `;
 
+export const ContentForm = styled.View`
+margin-top: 16px;
+`;
+
 export const HeaderForm = styled.View`
     padding: 24px 16px;
     background: ${Colors.white};

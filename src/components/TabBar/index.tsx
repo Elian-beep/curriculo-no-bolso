@@ -9,7 +9,7 @@ import { useIconsContext } from "../../../contexts/IconsContext";
 export const TabBar: React.FC = () => {
     const { setCurrentRouteName } = useRouteContext();
     const { sharedData } = useAppContext();
-    const { iconListContext, setIconListContext, iconCurrContext, setIconCurrContext } = useIconsContext();
+    const { iconListContext, iconCurrContext } = useIconsContext();
     const [switchInFocus, setSwitchInFocus] = useState<boolean>(true);
 
     const handleRoute = async (dataRoute) => {

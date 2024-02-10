@@ -1,10 +1,9 @@
 import { Text, TextInput, View } from "react-native";
 import { DuoTitle } from "../../DuoTitle";
-import { ContainerForm, FormGroup, HeaderForm, TextRequired } from "../../../default.styled";
+import { ContainerForm, ContentForm, FormGroup, HeaderForm, TextRequired } from "../../../default.styled";
 import { InputDefault } from "../../InputDefault";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ISimpleCurriculum } from "../../../interfaces/ICurriculum";
-import { ContentForm } from "./styled.FormRequired";
 import { ButtonDefault } from "../../ButtonDefault";
 
 interface Props {
@@ -20,9 +19,12 @@ export const FormRequired: React.FC<Props> = ({ exportCurrRequired }) => {
     const [phone, setPhone] = useState<string>();
     const [linkedin, setLinkedin] = useState<string>();
 
-    const handleSaveCurr = async () => {
-        await setCurrRequired({ title, completeName, email, phone, linkedin });
-        exportCurrRequired(currRequired);
+    useEffect(() => {
+        handleSaveCurr({ title, completeName, email, phone, linkedin })
+    }, [title, completeName, email, phone, linkedin]);
+    
+    const handleSaveCurr = (value: ISimpleCurriculum) => {
+        exportCurrRequired(value);
     }
 
     return (
@@ -60,7 +62,7 @@ export const FormRequired: React.FC<Props> = ({ exportCurrRequired }) => {
                         </Text>
                         <InputDefault onTextChange={(value) => setLinkedin(value)} />
                     </FormGroup>
-                    <ButtonDefault title="Salvar" onPress={ handleSaveCurr} />
+                    {/* <ButtonDefault title="Salvar" onPress={() => exportCurrRequired({ title, completeName, email, phone, linkedin })} /> */}
                 </ContainerForm>
             </ContentForm>
         </>

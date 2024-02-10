@@ -6,23 +6,19 @@ import { useRouteContext } from "../../../contexts/RouteContext";
 import { DefaultContent } from "../../default.styled";
 import { FormRequired } from "../../components/Forms/FormRequired";
 import { ISimpleCurriculum } from "../../interfaces/ICurriculum";
+import { FormAcademic } from "../../components/Forms/FormAcademic";
 
 export const CreateCv = () => {
-    const { currentRouteName } = useRouteContext();
-    
-    const [currRequired, setCurrRequired] = useState<ISimpleCurriculum>({completeName: "", email: "", phone: "", title: ""});
-    
-    // const { setIconListContext, setIconCurrContext } = useIconsContext();
-    // useEffect(() => {
-    //     setIconListContext(iconList.light);
-    //     setIconCurrContext(iconCurr.dark);
-    // }, [currentRouteName]);
+
+    const [currRequired, setCurrRequired] = useState<ISimpleCurriculum>();
+    const [academics, setAcademics] = useState<IAcademic[]>([]);
 
     return (
-        <DefaultContent>
-            <ScrollView>
+        <ScrollView>
+            <DefaultContent>
                 <FormRequired exportCurrRequired={(value) => setCurrRequired(value)} />
-            </ScrollView>
-        </DefaultContent>
+                <FormAcademic exportAcademics={(value) => setAcademics(value)} />
+            </DefaultContent>
+        </ScrollView>
     );
 }
