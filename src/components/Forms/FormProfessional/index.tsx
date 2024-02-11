@@ -42,6 +42,8 @@ export const FormProfessional: React.FC<Props> = ({ exportProfessionals }) => {
         setIdTemp(Math.floor(Math.random() * 10000));
     }
 
+    const titleButton = professionals.length > 0 ? 'Adicionar outra experiência' : 'Adicionar experiência';
+
     return (
         <ContentForm>
             <HeaderForm>
@@ -56,7 +58,7 @@ export const FormProfessional: React.FC<Props> = ({ exportProfessionals }) => {
                         key={professionalItem.id}
                     />
                 )}
-                <ButtonDefault onPress={() => createNewProfessional({ id: idTemp })} title="Adicionar experiência" />
+                <ButtonDefault onPress={() => createNewProfessional({ id: idTemp })} title={titleButton} />
             </ContainerForm>
         </ContentForm>
     );

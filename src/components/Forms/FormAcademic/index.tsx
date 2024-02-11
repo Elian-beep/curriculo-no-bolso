@@ -41,6 +41,8 @@ export const FormAcademic: React.FC<Props> = ({exportAcademics}) => {
         setIdTemp(Math.floor(Math.random() * 10000));
     }
 
+    const titleButton = academics.length > 0 ? 'Adicionar outra formação' : 'Adicionar formação';
+
     return (
         <ContentForm>
             <HeaderForm>
@@ -54,7 +56,7 @@ export const FormAcademic: React.FC<Props> = ({exportAcademics}) => {
                         exportRemoveAcademic={(value) => setConfirmRemove({id: value.id, confirm: value.isRemove})}
                         key={academicItem.id} />
                 )}
-                <ButtonDefault onPress={() => createNewAcademic({ id: idTemp })} title="Adicionar formação" />
+                <ButtonDefault onPress={() => createNewAcademic({ id: idTemp })} title={titleButton} />
             </ContainerForm>
         </ContentForm>
     )
