@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { IAward } from "../../../interfaces/IAward";
 import { ContainerForm, ContentForm, HeaderForm } from "../../../default.styled";
 import { DuoTitle } from "../../DuoTitle";
-import { UniqueAcademic } from "../FormAcademic/UniqueAcademic";
 import { UniqueAwards } from "./UniqueAwards";
 import { ButtonDefault } from "../../ButtonDefault";
 
@@ -27,8 +26,11 @@ export const FormAwards: React.FC<Props> = ({exportAwards}) => {
                 })
             )
         }
-        exportAwards(awards);
     }, [award]);
+
+    useEffect(() => {
+        exportAwards(awards);
+    }, [awards]);
 
     useEffect(() => {
         if(confirmRemove && confirmRemove.confirm){

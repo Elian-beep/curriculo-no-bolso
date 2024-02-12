@@ -26,8 +26,11 @@ export const FormCertification: React.FC<Props> = ({exportCertifications}) => {
                 })    
             );
         }
-        exportCertifications(certifications);
     }, [certification]);
+
+    useEffect(() => {
+        exportCertifications(certifications);
+    }, [certifications]);
 
     useEffect(() => {
         if(confirmRemove && confirmRemove.confirm){

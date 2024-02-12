@@ -27,8 +27,11 @@ export const FormProfessional: React.FC<Props> = ({ exportProfessionals }) => {
                 })
             );
         }
-        exportProfessionals(professionals);
     }, [professional]);
+
+    useEffect(() => {
+        exportProfessionals(professionals);
+    }, [professionals]);
 
     useEffect(() => {
         if (confirmRemove && confirmRemove.confirm) {
