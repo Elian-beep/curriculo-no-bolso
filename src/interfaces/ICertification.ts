@@ -3,5 +3,6 @@ export interface ICertification {
     curse?: string,
     institution?: string,
     finish?: string,
-    description?: string
+    description?: string,
+    curriculum_id?: number,
 }

@@ -27,7 +27,7 @@ export const FormAcademic: React.FC<Props> = ({ exportAcademics }) => {
             )
         }
     }, [academic]);
-    
+
     useEffect(() => {
         exportAcademics(academics);
     }, [academics]);
@@ -36,7 +36,6 @@ export const FormAcademic: React.FC<Props> = ({ exportAcademics }) => {
         if (confirmRemove && confirmRemove.confirm) {
             setAcademics(prevState => prevState.filter(item => item.id !== confirmRemove.id));
         }
-        console.log(academics);
         exportAcademics(academics);
     }, [confirmRemove]);
 
@@ -54,13 +53,11 @@ export const FormAcademic: React.FC<Props> = ({ exportAcademics }) => {
             </HeaderForm>
             <ContainerForm headerForm>
                 {academics.map(academicItem =>
-                    <>
-                        <UniqueAcademic
-                            exportAcademic={(value) => setAcademic(value)}
-                            idTemp={academicItem.id}
-                            exportRemoveAcademic={(value) => setConfirmRemove({ id: value.id, confirm: value.isRemove })}
-                            key={academicItem.id} />
-                    </>
+                    <UniqueAcademic
+                        exportAcademic={(value) => setAcademic(value)}
+                        idTemp={academicItem.id}
+                        exportRemoveAcademic={(value) => setConfirmRemove({ id: value.id, confirm: value.isRemove })}
+                        key={academicItem.id} />
                 )}
                 <ButtonDefault onPress={() => createNewAcademic({ id: idTemp })} title={titleButton} />
             </ContainerForm>

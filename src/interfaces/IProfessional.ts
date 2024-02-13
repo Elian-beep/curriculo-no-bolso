@@ -5,4 +5,5 @@ export interface IProfessional {
     start?: string,
     finish?: string,
     description?: string,
+    curriculum_id?: number,
 }

@@ -30,7 +30,9 @@ export const FormRequired: React.FC<Props> = ({ exportCurrRequired }) => {
     return (
         <>
             <ContainerForm>
-                <DuoTitle size="md" title="Título do Currículo" />
+                <Text>
+                <DuoTitle size="md" title="Título do Currículo" /> <TextRequired>(obrigatório)</TextRequired>
+                </Text>
                 <InputDefault onTextChange={(value) => setTitle(value)} />
             </ContainerForm>
             <ContentForm>

@@ -5,8 +5,11 @@ import { Routes } from './src/routes';
 import { AppProvider } from './contexts/AppContext';
 import { RouteProvider } from './contexts/RouteContext';
 import { IconsProvider } from './contexts/IconsContext';
+import { initializeDatabase } from './src/data/SQLiteDatabase';
 
 export default function App() {
+  initializeDatabase();
+
   return (
     <AppProvider>
       <RouteProvider>

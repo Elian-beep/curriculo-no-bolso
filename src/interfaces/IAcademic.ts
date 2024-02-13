@@ -4,5 +4,6 @@ interface IAcademic {
     type?: string,
     curse?: string,
     start?: string,
-    finish?: string
+    finish?: string,
+    curriculum_id?: number,
 }
