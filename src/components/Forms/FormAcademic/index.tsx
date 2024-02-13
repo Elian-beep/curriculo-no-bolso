@@ -4,6 +4,7 @@ import { ButtonDefault } from "../../ButtonDefault"
 import { DuoTitle } from "../../DuoTitle"
 import { Text } from "react-native"
 import { UniqueAcademic } from "./UniqueAcademic"
+import { alertUnavailable } from "../../../services/AlertUnavailable"
 
 interface Props {
     exportAcademics: (value: IAcademic[]) => void,
@@ -59,7 +60,8 @@ export const FormAcademic: React.FC<Props> = ({ exportAcademics }) => {
                         exportRemoveAcademic={(value) => setConfirmRemove({ id: value.id, confirm: value.isRemove })}
                         key={academicItem.id} />
                 )}
-                <ButtonDefault onPress={() => createNewAcademic({ id: idTemp })} title={titleButton} />
+                {/* <ButtonDefault onPress={() => createNewAcademic({ id: idTemp })} title={titleButton} /> */}
+                <ButtonDefault onPress={alertUnavailable} title={titleButton} />
             </ContainerForm>
         </ContentForm>
     )

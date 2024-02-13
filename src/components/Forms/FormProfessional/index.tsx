@@ -5,6 +5,7 @@ import { DuoTitle } from "../../DuoTitle";
 import { UniqueProfessional } from "./UniqueProfessional";
 import { IProfessional } from "../../../interfaces/IProfessional";
 import { Text } from "react-native";
+import { alertUnavailable } from "../../../services/AlertUnavailable";
 
 interface Props {
     exportProfessionals: (value: IProfessional[]) => void,
@@ -61,7 +62,8 @@ export const FormProfessional: React.FC<Props> = ({ exportProfessionals }) => {
                         key={professionalItem.id}
                     />
                 )}
-                <ButtonDefault onPress={() => createNewProfessional({ id: idTemp })} title={titleButton} />
+                {/* <ButtonDefault onPress={() => createNewProfessional({ id: idTemp })} title={titleButton} /> */}
+                <ButtonDefault onPress={alertUnavailable} title={titleButton} />
             </ContainerForm>
         </ContentForm>
     );

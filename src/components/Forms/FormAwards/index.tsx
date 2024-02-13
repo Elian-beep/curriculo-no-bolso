@@ -4,6 +4,7 @@ import { ContainerForm, ContentForm, HeaderForm } from "../../../default.styled"
 import { DuoTitle } from "../../DuoTitle";
 import { UniqueAwards } from "./UniqueAwards";
 import { ButtonDefault } from "../../ButtonDefault";
+import { alertUnavailable } from "../../../services/AlertUnavailable";
 
 interface Props {
     exportAwards: (value: IAward[]) => void,
@@ -60,7 +61,8 @@ export const FormAwards: React.FC<Props> = ({exportAwards}) => {
                         key={awardItem.id}
                     />    
                 )}
-                <ButtonDefault onPress={() => createNewAward({id: idTemp})} title={titleButton} />
+                {/* <ButtonDefault onPress={() => createNewAward({id: idTemp})} title={titleButton} /> */}
+                <ButtonDefault onPress={alertUnavailable} title={titleButton} />
             </ContainerForm>
         </ContentForm>
     );

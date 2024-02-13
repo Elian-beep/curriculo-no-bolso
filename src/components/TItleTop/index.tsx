@@ -1,4 +1,3 @@
-import { Text, View } from "react-native"
 import { BoxTop, Content, TextTitle } from "./styled.titleTop"
 import { useRouteContext } from "../../../contexts/RouteContext"
 import * as NetInfo from "@react-native-community/netinfo"
@@ -13,7 +12,7 @@ export const TitleTop = () => {
 
     useEffect(() => {
         NetInfo.fetch().then(state => setConn(state.isInternetReachable));
-    }, [conn]);
+    }, [conn, currentRouteName]);
 
     useEffect(() => {
         setTitle(currentRouteName == 'list' ? "Lista" : "Criar currículo");

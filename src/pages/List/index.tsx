@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity } from "react-native";
+import { ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { ISimpleCurriculum } from "../../interfaces/ICurriculum";
 import { AlertDefault } from "../../components/AlertDefault";
@@ -8,11 +8,10 @@ import { useRouteContext } from "../../../contexts/RouteContext";
 import { getAllCurrSql } from "../../data/Curriculum";
 import { CardCurr } from "../../components/CardCurr";
 import { ContainerCardsCurr } from "./styled.list";
-import { initializeDatabase } from "../../data/SQLiteDatabase";
-import { ButtonDefault } from "../../components/ButtonDefault";
 
 export const List = ({ navigation }) => {
     const [curriculum, setCurriculum] = useState<ISimpleCurriculum[]>([]);
+
     const { currentRouteName } = useRouteContext();
     const { setSharedData } = useAppContext();
     setSharedData(navigation);
@@ -29,13 +28,17 @@ export const List = ({ navigation }) => {
         });
     }
 
+    const handleRemoveCurr = async () => {
+        await syncCurr();
+    };
+
     return (
         <ScrollView>
             <DefaultContent>
                 {curriculum.length > 0
                     ?
                     <ContainerCardsCurr>
-                        {curriculum.map(currItem => <CardCurr curriculum={currItem} key={currItem.id} />)}
+                        {curriculum.map(currItem => <CardCurr onCurrRemove={handleRemoveCurr} curriculum={currItem} key={currItem.id} />)}
                     </ContainerCardsCurr>
                     :
                     <AlertDefault />
