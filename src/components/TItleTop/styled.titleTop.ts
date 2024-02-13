@@ -4,9 +4,14 @@ import Colors from "../../assets/Colors";
 export const Content = styled.View`
     padding: 16px 0px;
     padding-top: 50px;
-    display: flex;
     align-items: center;
     background-color: ${Colors.blue_dark};
+`;
+
+export const BoxTop = styled.View`
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
 `;
 
 export const TextTitle = styled.Text`

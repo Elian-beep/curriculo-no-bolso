@@ -1,4 +1,4 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import { ISimpleCurriculum } from "../../interfaces/ICurriculum";
 import { AlertDefault } from "../../components/AlertDefault";
@@ -9,6 +9,7 @@ import { getAllCurrSql } from "../../data/Curriculum";
 import { CardCurr } from "../../components/CardCurr";
 import { ContainerCardsCurr } from "./styled.list";
 import { initializeDatabase } from "../../data/SQLiteDatabase";
+import { ButtonDefault } from "../../components/ButtonDefault";
 
 export const List = ({ navigation }) => {
     const [curriculum, setCurriculum] = useState<ISimpleCurriculum[]>([]);
@@ -39,7 +40,6 @@ export const List = ({ navigation }) => {
                     :
                     <AlertDefault />
                 }
-                <Text></Text>
             </DefaultContent>
         </ScrollView>
     );
