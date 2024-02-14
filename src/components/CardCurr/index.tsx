@@ -14,6 +14,7 @@ import { getAcademicsByCurr } from "../../data/Academic";
 import { removeCurrSql } from "../../data/Curriculum";
 import { getProfessionalByCurr } from "../../data/Professional";
 import { alertUnavailable } from "../../services/AlertUnavailable";
+import { generatePdf } from "../../services/generatePdf";
 
 interface Props {
     curriculum: ISimpleCurriculum,
@@ -26,6 +27,18 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
     const [professionals, setProfessionals] = useState<IProfessional[]>([]);
     const [certifications, setCertifications] = useState<ICertification[]>([]);
     const [awards, setAwards] = useState<IAward[]>([]);
+
+    useEffect(() => {
+        setFullCurriculum({
+            id: curriculum.id,
+            title: curriculum.title,
+            completeName: curriculum.completeName,
+            email: curriculum.email,
+            phone: curriculum.phone,
+            linkedin: curriculum.linkedin,
+            academics, awards, certifications, professionals
+        });
+    }, []);
 
     const listAllInfo = async () => {
         console.log("Buscando o restante das informações");
@@ -69,7 +82,7 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
                 <DuoTitle size="md" title={curriculum.title} />
                 <ContentActions>
                     <BtnAction color={Colors.blue_mid} icon={icons_actions.pencil} title="Editar" exportAction={alertUnavailable} />
-                    <BtnAction color={Colors.blue_mid} icon={icons_actions.download} title="Gerar PDF" exportAction={alertUnavailable} />
+                    <BtnAction color={Colors.blue_mid} icon={icons_actions.download} title="Gerar PDF" exportAction={() => generatePdf(fullCurriculum)} />
                     <BtnAction color={Colors.red_dark} icon={icons_actions.trash} title="Excluir" exportAction={() => removeCurr()} />
                 </ContentActions>
             </ContainerForm>
