@@ -6,21 +6,66 @@ import { AppProvider } from './contexts/AppContext';
 import { RouteProvider, useRouteContext } from './contexts/RouteContext';
 import { IconsProvider } from './contexts/IconsContext';
 import { initializeDatabase } from './src/data/SQLiteDatabase';
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button, Text } from 'react-native';
+import { ScreenIntro } from './src/components/ScreensIntro';
+import { ButtonDefault } from './src/components/ButtonDefault';
 
 export default function App() {
-  initializeDatabase();
+  const [screenNumber, setScreenNumber] = useState<"01" | "02" | "03">("01");
+  const [firstTime, setFirstTime] = useState(true);
+  
+  useEffect(() => {
+    initializeDatabase();
+    const checkFirstTime = async () => {
+      try {
+        const value = await AsyncStorage.getItem('@firstTime');
+        if (value !== null) {
+          setFirstTime(false);
+        }
+      } catch (error) {
+        console.error('Erro ao acessar AsyncStorage:', error);
+      }
+    };
+
+    checkFirstTime();
+  }, []);
+
+  const switchScreen = () => {
+    if (screenNumber === "01") setScreenNumber("02");
+    if (screenNumber === "02") setScreenNumber("03");
+    if (screenNumber === "03") startApp;
+  }
+
+  const startApp = async () => {
+    await AsyncStorage.setItem('@firstTime', 'true');
+    setFirstTime(false);
+  }
 
   return (
-    <AppProvider>
-      <RouteProvider>
+    <RouteProvider>
+      <AppProvider>
         <IconsProvider>
           <AllContainer>
             <TitleTop />
-            <Routes />
+            {
+              firstTime
+                ?
+                <>
+                  <ScreenIntro screenNumber={screenNumber}>
+                    <ButtonDefault title='Começar' onPress={switchScreen} />
+                  </ScreenIntro>
+                </>
+                :
+                <>
+                  <Routes />
+                </>
+            }
             <StatusBar style="auto" />
           </AllContainer>
         </IconsProvider>
-      </RouteProvider>
-    </AppProvider>
+      </AppProvider>
+    </RouteProvider>
   );
 }
