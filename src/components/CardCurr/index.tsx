@@ -45,9 +45,9 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
         await getAcademicsByCurr(curriculum.id).then((response: IAcademic[]) => {
             setAcademics(response);
         });
-        // await getProfessionalByCurr(curriculum.id).then((response: IProfessional[]) => {
-        //     setProfessionals(response);
-        // })
+        await getProfessionalByCurr(curriculum.id).then((response: IProfessional[]) => {
+            setProfessionals(response);
+        })
     }
 
     const listTemp = () => {

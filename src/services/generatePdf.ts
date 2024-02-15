@@ -4,7 +4,6 @@ import { ICurriculum, ISimpleCurriculum } from "../interfaces/ICurriculum";
 
 export const generatePdf = async (curr: ICurriculum) => {
     console.log("gerando pdf");
-    console.log("Academics: ", curr.academics.length);
     let html = `
     <html>
 
@@ -80,6 +79,47 @@ export const generatePdf = async (curr: ICurriculum) => {
             ">${academic.type} | ${academic.curse}</span>
             `;
         })
+    }
+
+    if(curr.professionals.length > 0){
+        html += `
+            <div style="
+                border-bottom: 1px solid black;
+                margin-top: 10px;
+            ">
+                <span style="
+                font-weight: 700;
+                font-size: 12pt;
+            ">EXPERIÊNCIA PROFISSIONAL</span>
+            </div>
+        `;
+        curr.professionals.map(professional => {
+            html += `
+            <div>
+                <span style="
+                font-weight: 700;
+                font-size: 11pt;
+            ">${professional.name}</span> | <span style="
+                font-size: 11pt;
+            ">${professional.start} - ${professional.finish}</span>
+            </div>
+            <span style="
+                font-size: 11pt;
+                font-style: italic;
+            ">${professional.role}</span>
+            <div>
+                <span style="
+                    font-size: 11pt;
+                    text-align: justify;
+                ">
+                    ${professional.description}
+                </span>
+            </div>
+            `;
+        });
+        html += `
+            
+        `;
     }
 
     html += `</div>`;

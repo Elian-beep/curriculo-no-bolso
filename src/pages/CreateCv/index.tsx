@@ -15,6 +15,7 @@ import { useRouteContext } from "../../../contexts/RouteContext";
 import { useAppContext } from "../../../contexts/AppContext";
 import { createCurrSql } from "../../data/Curriculum";
 import { createAcademicSql } from "../../data/Academic";
+import { createProfessionalSql } from "../../data/Professional";
 
 export const CreateCv = () => {
 
@@ -53,6 +54,7 @@ export const CreateCv = () => {
         } else {
             const idCurr = await addCurrGetId();
             await addAcademics(idCurr);
+            await addProfessionals(idCurr);
 
             await setCurrentRouteName("list");
             sharedData.navigate("list")
@@ -72,7 +74,7 @@ export const CreateCv = () => {
 
     const addAcademics = async (idCurr: number) => {
         for (const academic of academics) {
-            console.log(`salvando ${academic.name}`);
+            console.log(`salvando formação academica: ${academic.name}`);
             await createAcademics(academic, idCurr);
         }
     }
@@ -80,6 +82,19 @@ export const CreateCv = () => {
     const createAcademics = async (academic: IAcademic, idCurr: number) => {
         await createAcademicSql(academic, idCurr)
             .then(id => `Acadêmico criado com o id: ${id}`)
+            .catch(err => console.log(err));
+    }
+
+    const addProfessionals = async (idCurr: number) => {
+        for(const professional of professionals) {
+            console.log(`salvando experiencia profissional: ${professional.name}`);
+            await createProfessionals(professional, idCurr);
+        }
+    }
+
+    const createProfessionals = async (professional: IProfessional, idCurr: number) => {
+        await createProfessionalSql(professional, idCurr)
+            .then(id => `Professional criado com o id: ${id}`)
             .catch(err => console.log(err));
     }
 

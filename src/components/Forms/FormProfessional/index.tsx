@@ -62,8 +62,8 @@ export const FormProfessional: React.FC<Props> = ({ exportProfessionals }) => {
                         key={professionalItem.id}
                     />
                 )}
-                {/* <ButtonDefault onPress={() => createNewProfessional({ id: idTemp })} title={titleButton} /> */}
-                <ButtonDefault onPress={alertUnavailable} title={titleButton} />
+                <ButtonDefault onPress={() => createNewProfessional({ id: idTemp })} title={titleButton} />
+                {/* <ButtonDefault onPress={alertUnavailable} title={titleButton} /> */}
             </ContainerForm>
         </ContentForm>
     );
