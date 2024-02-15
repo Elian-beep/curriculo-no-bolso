@@ -16,6 +16,7 @@ import { useAppContext } from "../../../contexts/AppContext";
 import { createCurrSql } from "../../data/Curriculum";
 import { createAcademicSql } from "../../data/Academic";
 import { createProfessionalSql } from "../../data/Professional";
+import { createcertificationSql } from "../../data/Certification";
 
 export const CreateCv = () => {
 
@@ -55,6 +56,7 @@ export const CreateCv = () => {
             const idCurr = await addCurrGetId();
             await addAcademics(idCurr);
             await addProfessionals(idCurr);
+            await addCertifications(idCurr);
 
             await setCurrentRouteName("list");
             sharedData.navigate("list")
@@ -95,6 +97,19 @@ export const CreateCv = () => {
     const createProfessionals = async (professional: IProfessional, idCurr: number) => {
         await createProfessionalSql(professional, idCurr)
             .then(id => `Professional criado com o id: ${id}`)
+            .catch(err => console.log(err));
+    }
+
+    const addCertifications = async (idCurr: number) => {
+        for(const certification of certifications) {
+            console.log(`salvando certificação: ${certification.curse}`);
+            await createCertifications(certification, idCurr);
+        }
+    }
+
+    const createCertifications = async (certification: ICertification, idCurr: number) => {
+        await createcertificationSql(certification, idCurr)
+            .then(id => `Certification criado com o id: ${id}`)
             .catch(err => console.log(err));
     }
 

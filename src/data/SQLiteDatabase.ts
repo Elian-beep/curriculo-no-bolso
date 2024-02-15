@@ -23,13 +23,13 @@ const initializeDatabase = () => {
         )
 
         tx.executeSql(
-            'CREATE TABLE IF NOT EXISTS certification (id INTEGER PRIMARY KEY AUTOINCREMENT, curriculum_id INTEGER NOT NULL, curse TEXT NOT NULL, institution TEXT NOT NULL, finish TEXT NOT NULL, description TEXT NOT NULL, FOREIGN KEY (curriculum_id) REFERENCES curriculum(id));',
+            'CREATE TABLE IF NOT EXISTS certification (id INTEGER PRIMARY KEY AUTOINCREMENT, curriculum_id INTEGER NOT NULL, curse TEXT, institution TEXT, finish TEXT, description TEXT, FOREIGN KEY (curriculum_id) REFERENCES curriculum(id));',
             [],
             () => console.log('Tabela certification criada em SQLiteDatabase')
         )
 
         tx.executeSql(
-            'CREATE TABLE IF NOT EXISTS award (id INTEGER PRIMARY KEY AUTOINCREMENT, curriculum_id INTEGER NOT NULL, name TEXT NOT NULL, year TEXT NOT NULL, description TEXT NOT NULL, FOREIGN KEY (curriculum_id) REFERENCES curriculum(id));',
+            'CREATE TABLE IF NOT EXISTS award (id INTEGER PRIMARY KEY AUTOINCREMENT, curriculum_id INTEGER NOT NULL, name TEXT, year TEXT, description TEXT, FOREIGN KEY (curriculum_id) REFERENCES curriculum(id));',
             [],
             () => console.log('Tabela award criada em SQLiteDatabase')
         )

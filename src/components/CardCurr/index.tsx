@@ -15,6 +15,7 @@ import { removeCurrSql } from "../../data/Curriculum";
 import { getProfessionalByCurr } from "../../data/Professional";
 import { alertUnavailable } from "../../services/AlertUnavailable";
 import { generatePdf } from "../../services/generatePdf";
+import { getCertificationsByCurr } from "../../data/Certification";
 
 interface Props {
     curriculum: ISimpleCurriculum,
@@ -48,11 +49,15 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
         await getProfessionalByCurr(curriculum.id).then((response: IProfessional[]) => {
             setProfessionals(response);
         })
+        await getCertificationsByCurr(curriculum.id).then((response: ICertification[]) => {
+            setCertifications(response);
+        });
     }
 
     const listTemp = () => {
         console.log(academics);
         console.log(professionals);
+        console.log(certifications);
     }
 
     const removeCurr = async () => {

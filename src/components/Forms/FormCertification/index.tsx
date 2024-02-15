@@ -61,8 +61,8 @@ export const FormCertification: React.FC<Props> = ({exportCertifications}) => {
                         key={certificationItem.id}
                     />    
                 )}
-                {/* <ButtonDefault onPress={() => createNewCertification({id: idTemp})} title={titleButton} /> */}
-                <ButtonDefault onPress={alertUnavailable} title={titleButton} />
+                <ButtonDefault onPress={() => createNewCertification({id: idTemp})} title={titleButton} />
+                {/* <ButtonDefault onPress={alertUnavailable} title={titleButton} /> */}
             </ContainerForm>
         </ContentForm>
     );

@@ -81,7 +81,7 @@ export const generatePdf = async (curr: ICurriculum) => {
         })
     }
 
-    if(curr.professionals.length > 0){
+    if (curr.professionals.length > 0) {
         html += `
             <div style="
                 border-bottom: 1px solid black;
@@ -117,9 +117,39 @@ export const generatePdf = async (curr: ICurriculum) => {
             </div>
             `;
         });
+    }
+
+    if (curr.certifications.length > 0) {
         html += `
-            
+        <div style="
+            border-bottom: 1px solid black;
+            margin-top: 10px;
+        ">
+            <span style="
+            font-weight: 700;
+            font-size: 12pt;
+        ">CERTIFICADOS</span>
+        </div>
         `;
+
+        curr.certifications.map(certification => {
+            html += `
+            <div>
+                <span style="
+                font-weight: 700;
+                font-size: 11pt;
+            ">${certification.curse}</span> | <span style="
+                font-size: 11pt;
+            ">${certification.institution} - ${certification.finish}</span>
+            </div>
+            <span style="
+                    font-size: 11pt;
+                    text-align: justify;
+                ">
+                ${certification.description}
+            </span>
+            `;
+        });
     }
 
     html += `</div>`;
