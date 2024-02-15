@@ -1,15 +1,17 @@
 import { IAward } from "../interfaces/IAward";
 import { db } from "./SQLiteDatabase";
 
-const createAwardSql = (obj: IAward) => {
+const createAwardSql = (obj: IAward, idCurr: number) => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
                 'INSERT INTO award (curriculum_id, name, year, description) VALUES (?, ?, ?, ?)',
-                [obj.curriculum_id, obj.name, obj.year, obj.description],
+                [idCurr, obj.name, obj.year, obj.description],
                 (_, { rowsAffected, insertId }) => {
-                    if (rowsAffected > 0) resolve(insertId);
-                    else reject(new Error('Erro ao inserir award ' + JSON.stringify(obj)));
+                    if (rowsAffected > 0) {
+                        resolve(insertId);
+                    }
+                    else reject(new Error('Erro ao inserir certification ' + JSON.stringify(obj)));
                 },
             );
         });
@@ -20,12 +22,9 @@ const getAwardsByCurr = (idCurr: number) => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'SELECT * FROM award WHERE cucciculum_id = ?',
+                'SELECT * FROM award WHERE curriculum_id = ?',
                 [idCurr],
-                (_, { rowsAffected, insertId }) => {
-                    if (rowsAffected > 0) resolve(insertId);
-                    else reject(new Error('Erro ao buscar award para ' + JSON.stringify(idCurr)));
-                },
+                (_, { rows }) => resolve(rows._array),
             );
         })
     });

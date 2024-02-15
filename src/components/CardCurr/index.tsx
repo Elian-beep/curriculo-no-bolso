@@ -16,6 +16,7 @@ import { getProfessionalByCurr } from "../../data/Professional";
 import { alertUnavailable } from "../../services/AlertUnavailable";
 import { generatePdf } from "../../services/generatePdf";
 import { getCertificationsByCurr } from "../../data/Certification";
+import { getAwardsByCurr } from "../../data/Award";
 
 interface Props {
     curriculum: ISimpleCurriculum,
@@ -23,22 +24,13 @@ interface Props {
 }
 
 export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
-    const [fullCurriculum, setFullCurriculum] = useState<ICurriculum>();
     const [academics, setAcademics] = useState<IAcademic[]>([]);
     const [professionals, setProfessionals] = useState<IProfessional[]>([]);
     const [certifications, setCertifications] = useState<ICertification[]>([]);
     const [awards, setAwards] = useState<IAward[]>([]);
 
     useEffect(() => {
-        setFullCurriculum({
-            id: curriculum.id,
-            title: curriculum.title,
-            completeName: curriculum.completeName,
-            email: curriculum.email,
-            phone: curriculum.phone,
-            linkedin: curriculum.linkedin,
-            academics, awards, certifications, professionals
-        });
+        listAllInfo();
     }, []);
 
     const listAllInfo = async () => {
@@ -52,12 +44,9 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
         await getCertificationsByCurr(curriculum.id).then((response: ICertification[]) => {
             setCertifications(response);
         });
-    }
-
-    const listTemp = () => {
-        console.log(academics);
-        console.log(professionals);
-        console.log(certifications);
+        await getAwardsByCurr(curriculum.id).then((response: IAward[]) => {
+            setAwards(response);
+        });
     }
 
     const removeCurr = async () => {
@@ -86,7 +75,7 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
             <ContainerForm>
                 <DuoTitle size="md" title={curriculum.title} />
                 <ContentActions>
-                    <BtnAction color={Colors.blue_mid} icon={icons_actions.pencil} title="Editar" exportAction={() => listTemp()} />
+                    <BtnAction color={Colors.blue_mid} icon={icons_actions.pencil} title="Editar" exportAction={alertUnavailable} />
                     <BtnAction color={Colors.blue_mid} icon={icons_actions.download} title="Gerar PDF" exportAction={() => generatePdf({
                         id: curriculum.id,
                         title: curriculum.title,

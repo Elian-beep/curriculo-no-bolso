@@ -17,6 +17,7 @@ import { createCurrSql } from "../../data/Curriculum";
 import { createAcademicSql } from "../../data/Academic";
 import { createProfessionalSql } from "../../data/Professional";
 import { createcertificationSql } from "../../data/Certification";
+import { createAwardSql } from "../../data/Award";
 
 export const CreateCv = () => {
 
@@ -48,15 +49,15 @@ export const CreateCv = () => {
     }, [currRequired, academics, professionals, certifications, awards]);
 
     const createCurriculum = async () => {
-        let idCurr: number;
 
         if (!currRequired.title || !currRequired.completeName || !currRequired.email || !currRequired.phone) {
             console.log("Preencha todas as informações");
         } else {
             const idCurr = await addCurrGetId();
-            await addAcademics(idCurr);
-            await addProfessionals(idCurr);
-            await addCertifications(idCurr);
+            if(addAcademics.length > 0) await addAcademics(idCurr);
+            if(professionals.length > 0) await addProfessionals(idCurr);
+            if(certifications.length > 0) await addCertifications(idCurr);
+            if(awards.length > 0) await addAwards(idCurr);
 
             await setCurrentRouteName("list");
             sharedData.navigate("list")
@@ -110,6 +111,19 @@ export const CreateCv = () => {
     const createCertifications = async (certification: ICertification, idCurr: number) => {
         await createcertificationSql(certification, idCurr)
             .then(id => `Certification criado com o id: ${id}`)
+            .catch(err => console.log(err));
+    }
+
+    const addAwards = async (idCurr: number) => {
+        for(const award of awards) {
+            console.log(`salvando premiação : ${award.name}`);
+            await createAwards(award, idCurr);
+        }
+    }
+
+    const createAwards = async (award: IAward, idCurr: number) => {
+        await createAwardSql(award, idCurr)
+            .then(id => `Award criado com o id: ${id}`)
             .catch(err => console.log(err));
     }
 
