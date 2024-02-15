@@ -21,7 +21,7 @@ const createAcademicSql = (obj: IAcademic, idCurr: number) => {
                     else reject(new Error('Erro ao inserir academic ' + JSON.stringify(obj)));
                 },
             );
-        })
+        });
     });
 }
 

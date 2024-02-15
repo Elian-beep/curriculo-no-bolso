@@ -15,7 +15,7 @@ import { ButtonDefault } from './src/components/ButtonDefault';
 export default function App() {
   const [screenNumber, setScreenNumber] = useState<"01" | "02" | "03">("01");
   const [firstTime, setFirstTime] = useState(true);
-  
+
   useEffect(() => {
     initializeDatabase();
     const checkFirstTime = async () => {
@@ -30,17 +30,16 @@ export default function App() {
     };
 
     checkFirstTime();
+    // AsyncStorage.removeItem('@firstTime');
   }, []);
 
-  const switchScreen = () => {
+  const switchScreen = async () => {
     if (screenNumber === "01") setScreenNumber("02");
     if (screenNumber === "02") setScreenNumber("03");
-    if (screenNumber === "03") startApp;
-  }
-
-  const startApp = async () => {
-    await AsyncStorage.setItem('@firstTime', 'true');
-    setFirstTime(false);
+    if (screenNumber === "03") {
+      setFirstTime(false);
+      await AsyncStorage.setItem('@firstTime', 'true');
+    }
   }
 
   return (

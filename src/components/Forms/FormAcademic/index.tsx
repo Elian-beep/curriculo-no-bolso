@@ -60,8 +60,8 @@ export const FormAcademic: React.FC<Props> = ({ exportAcademics }) => {
                         exportRemoveAcademic={(value) => setConfirmRemove({ id: value.id, confirm: value.isRemove })}
                         key={academicItem.id} />
                 )}
-                {/* <ButtonDefault onPress={() => createNewAcademic({ id: idTemp })} title={titleButton} /> */}
-                <ButtonDefault onPress={alertUnavailable} title={titleButton} />
+                <ButtonDefault onPress={() => createNewAcademic({ id: idTemp })} title={titleButton} />
+                {/* <ButtonDefault onPress={alertUnavailable} title={titleButton} /> */}
             </ContainerForm>
         </ContentForm>
     )

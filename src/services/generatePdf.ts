@@ -4,6 +4,7 @@ import { ICurriculum, ISimpleCurriculum } from "../interfaces/ICurriculum";
 
 export const generatePdf = async (curr: ICurriculum) => {
     console.log("gerando pdf");
+    console.log("Academics: ", curr.academics.length);
     let html = `
     <html>
 
@@ -17,7 +18,7 @@ export const generatePdf = async (curr: ICurriculum) => {
         ">${curr.completeName}</h1>
         <div style="
             border-bottom: 1px solid black;
-            margin-bottom: 10px;
+            margin-top: 10px;
         ">
             <span style="
             font-weight: 700;
@@ -49,6 +50,36 @@ export const generatePdf = async (curr: ICurriculum) => {
             ">Linkedin: <a href="${curr.linkedin}">${curr.linkedin}</a> 
             </span>
         `;
+    }
+
+    if (curr.academics.length > 0) {
+        html += `
+        <div style="
+            border-bottom: 1px solid black;
+            margin-top: 10px;
+        ">
+        <span style="
+            font-weight: 700;
+            font-size: 12pt;
+        ">FORMAÇÃO ACADÊMICA</span>
+        </div>
+        `;
+        curr.academics.map(academic => {
+            html += `
+            <div>
+            <span style="
+                font-weight: 700;
+                font-size: 11pt;
+            ">${academic.name}</span> | <span style="
+                font-size: 11pt;
+            ">${academic.start} - ${academic.finish}</span>
+            </div>
+            <span style="
+                font-size: 11pt;
+                font-style: italic;
+            ">${academic.type} | ${academic.curse}</span>
+            `;
+        })
     }
 
     html += `</div>`;

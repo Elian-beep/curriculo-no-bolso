@@ -45,9 +45,9 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
         await getAcademicsByCurr(curriculum.id).then((response: IAcademic[]) => {
             setAcademics(response);
         });
-        await getProfessionalByCurr(curriculum.id).then((response: IProfessional[]) => {
-            setProfessionals(response);
-        })
+        // await getProfessionalByCurr(curriculum.id).then((response: IProfessional[]) => {
+        //     setProfessionals(response);
+        // })
     }
 
     const listTemp = () => {
@@ -81,8 +81,16 @@ export const CardCurr: React.FC<Props> = ({ curriculum, onCurrRemove }) => {
             <ContainerForm>
                 <DuoTitle size="md" title={curriculum.title} />
                 <ContentActions>
-                    <BtnAction color={Colors.blue_mid} icon={icons_actions.pencil} title="Editar" exportAction={alertUnavailable} />
-                    <BtnAction color={Colors.blue_mid} icon={icons_actions.download} title="Gerar PDF" exportAction={() => generatePdf(fullCurriculum)} />
+                    <BtnAction color={Colors.blue_mid} icon={icons_actions.pencil} title="Editar" exportAction={() => listTemp()} />
+                    <BtnAction color={Colors.blue_mid} icon={icons_actions.download} title="Gerar PDF" exportAction={() => generatePdf({
+                        id: curriculum.id,
+                        title: curriculum.title,
+                        completeName: curriculum.completeName,
+                        email: curriculum.email,
+                        phone: curriculum.phone,
+                        linkedin: curriculum.linkedin,
+                        academics, awards, certifications, professionals
+                    })} />
                     <BtnAction color={Colors.red_dark} icon={icons_actions.trash} title="Excluir" exportAction={() => removeCurr()} />
                 </ContentActions>
             </ContainerForm>
