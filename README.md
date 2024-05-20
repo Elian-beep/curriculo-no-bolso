@@ -51,7 +51,7 @@ Instale as dependências
 Inicie o servidor da aplicação
 
 ```bash
-  npm run dev
+  npm start
 ```
 ## Público alvo
 
